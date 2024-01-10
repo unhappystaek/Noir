@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://stuff/emerland-italic.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/mainMenu.gd" type="Script" id=2]
+[ext_resource path="res://audio/lost-soul_medium-177571.mp3" type="AudioStream" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 104
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+outline_color = Color( 0.572549, 0.572549, 0.572549, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+
+[node name="mainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="noir" type="Label" parent="."]
+margin_left = 864.0
+margin_top = 200.0
+margin_right = 1061.0
+margin_bottom = 318.0
+custom_fonts/font = SubResource( 1 )
+text = "Noir"
+
+[node name="play" type="Button" parent="."]
+margin_left = 920.0
+margin_top = 616.0
+margin_right = 1006.0
+margin_bottom = 664.0
+focus_neighbour_top = NodePath("../quit")
+focus_neighbour_bottom = NodePath("../quit")
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.709804, 0.709804, 0.709804, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+text = "Play"
+flat = true
+
+[node name="quit" type="Button" parent="."]
+margin_left = 920.0
+margin_top = 688.0
+margin_right = 1006.0
+margin_bottom = 736.0
+focus_neighbour_top = NodePath("../play")
+focus_neighbour_bottom = NodePath("../play")
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.709804, 0.709804, 0.709804, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 4 )
+text = "quit"
+flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 10.0
+autoplay = true
+
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

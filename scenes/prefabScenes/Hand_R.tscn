@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://models/weapons/Hand_R.glb" type="PackedScene" id=1]
+[ext_resource path="res://materials/right.tres" type="Material" id=2]
+
+[node name="Hand_R" instance=ExtResource( 1 )]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
+
+[node name="Plane005" parent="." index="0"]
+transform = Transform( 0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 1.58992, 3.516, 0.053 )
+material/0 = ExtResource( 2 )

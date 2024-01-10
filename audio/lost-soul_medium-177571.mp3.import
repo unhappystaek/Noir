@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lost-soul_medium-177571.mp3-da74d6acc153203ef098b71ae5fcc1c2.mp3str"
+
+[deps]
+
+source_file="res://audio/lost-soul_medium-177571.mp3"
+dest_files=[ "res://.import/lost-soul_medium-177571.mp3-da74d6acc153203ef098b71ae5fcc1c2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

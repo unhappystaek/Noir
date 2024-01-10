@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stalker_death.mp3-9d423d061f41d0f8530a1e79aaf3e3ce.mp3str"
+
+[deps]
+
+source_file="res://audio/stalker_death.mp3"
+dest_files=[ "res://.import/stalker_death.mp3-9d423d061f41d0f8530a1e79aaf3e3ce.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

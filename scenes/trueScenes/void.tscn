@@ -1,0 +1,1899 @@
+[gd_scene load_steps=71 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://materials/void.tres" type="Material" id=2]
+[ext_resource path="res://stuff/shader/aberration.gdshader" type="Shader" id=3]
+[ext_resource path="res://stuff/env.tres" type="Environment" id=4]
+[ext_resource path="res://materials/light.tres" type="Material" id=5]
+[ext_resource path="res://scripts/weapons.gd" type="Script" id=6]
+[ext_resource path="res://scripts/void.gd" type="Script" id=7]
+[ext_resource path="res://scenes/prefabScenes/Pedastal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/prefabScenes/Hand_R.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/prefabScenes/Hand_L.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/weaponAltar.gd" type="Script" id=11]
+[ext_resource path="res://scripts/nextWave.gd" type="Script" id=12]
+[ext_resource path="res://scripts/interactRay.gd" type="Script" id=13]
+[ext_resource path="res://scripts/Area.gd" type="Script" id=14]
+[ext_resource path="res://animations/newWave.tres" type="Animation" id=15]
+[ext_resource path="res://scripts/weaponAreas/AreaLeftHand.gd" type="Script" id=16]
+[ext_resource path="res://scripts/weaponAreas/AreaRightHand.gd" type="Script" id=17]
+[ext_resource path="res://scenes/prefabScenes/weapons/bolter.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scripts/weaponAreas/AreaBolter.gd" type="Script" id=19]
+[ext_resource path="res://scenes/prefabScenes/weapons/Balls.tscn" type="PackedScene" id=20]
+[ext_resource path="res://textures/GAMEoverlay.png" type="Texture" id=21]
+[ext_resource path="res://scripts/weaponAreas/AreaBalls.gd" type="Script" id=22]
+[ext_resource path="res://scripts/UI.gd" type="Script" id=23]
+[ext_resource path="res://animations/fadeUI.tres" type="Animation" id=24]
+[ext_resource path="res://textures/heartleft.png" type="Texture" id=25]
+[ext_resource path="res://stuff/emerland-italic.ttf" type="DynamicFontData" id=26]
+[ext_resource path="res://scripts/enemyManager.gd" type="Script" id=27]
+[ext_resource path="res://audio/bolter.wav" type="AudioStream" id=28]
+[ext_resource path="res://textures/DAMAGEoverlay.png" type="Texture" id=29]
+[ext_resource path="res://textures/celownik.png" type="Texture" id=30]
+[ext_resource path="res://scenes/prefabScenes/weapons/Dodecagowno.tscn" type="PackedScene" id=31]
+[ext_resource path="res://textures/heartright.png" type="Texture" id=32]
+[ext_resource path="res://textures/hppoint.png" type="Texture" id=33]
+[ext_resource path="res://scripts/weaponAreas/AreaDodeca.gd" type="Script" id=34]
+[ext_resource path="res://audio/end.wav" type="AudioStream" id=35]
+[ext_resource path="res://audio/start.wav" type="AudioStream" id=36]
+[ext_resource path="res://scenes/prefabScenes/weapons/mother.tscn" type="PackedScene" id=37]
+[ext_resource path="res://scripts/weaponAreas/AreaMother.gd" type="Script" id=38]
+[ext_resource path="res://audio/mother.mp3" type="AudioStream" id=39]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 100, 100 )
+
+[sub_resource type="PhysicsMaterial" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="PlaneMesh" id=6]
+size = Vector2( 22, 102 )
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("TextureRect:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("TextureRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("TextureRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("TextureRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TextureRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="DynamicFont" id=21]
+size = 70
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 38
+outline_color = Color( 0.662745, 0.662745, 0.662745, 1 )
+font_data = ExtResource( 26 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+draw_center = false
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprite2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprite:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprite:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Sprite:modulate:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Sprite:modulate:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Sprite:modulate:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Sprite:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Sprite2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Sprite2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Sprite2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Sprite2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "loseHP"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 132, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprite2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 59.9999, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprite:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprite:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 140, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -59.9999, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Sprite:modulate:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Sprite:modulate:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Sprite:modulate:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Sprite:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Sprite2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Sprite2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Sprite2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Sprite2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprite2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprite:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprite:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Sprite:modulate:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Sprite:modulate:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Sprite:modulate:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Sprite:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Sprite2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Sprite2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Sprite2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Sprite2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "loseHP"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 132, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprite2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 59.9999, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprite:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprite:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 140, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -59.9999, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Sprite:modulate:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Sprite:modulate:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Sprite:modulate:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Sprite:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Sprite2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Sprite2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Sprite2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Sprite2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprite2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprite:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprite:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Sprite:modulate:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Sprite:modulate:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Sprite:modulate:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Sprite:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Sprite2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Sprite2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Sprite2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Sprite2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "loseHP"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite2:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 132, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprite2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 59.9999, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprite:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprite:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 140, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -59.9999, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Sprite:modulate:r")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Sprite:modulate:g")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Sprite:modulate:b")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Sprite:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Sprite2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("Sprite2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Sprite2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Sprite2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 3 )
+shader_param/r_displacement = Vector2( 3, 0 )
+shader_param/g_displacement = Vector2( 0, 0 )
+shader_param/b_displacement = Vector2( -3, 0 )
+
+[sub_resource type="Animation" id=14]
+resource_name = "New Anim"
+length = 0.1
+
+[sub_resource type="Animation" id=18]
+resource_name = "New Anim"
+length = 0.8
+
+[sub_resource type="Animation" id=31]
+resource_name = "New Anim"
+length = 0.7
+
+[sub_resource type="Animation" id=15]
+resource_name = "New Anim"
+length = 0.1
+
+[sub_resource type="Animation" id=16]
+resource_name = "New Anim"
+length = 0.7
+
+[sub_resource type="Animation" id=33]
+resource_name = "New Anim"
+length = 0.2
+
+[sub_resource type="CapsuleShape" id=8]
+height = 0.002
+
+[sub_resource type="CapsuleShape" id=7]
+height = 0.002
+
+[sub_resource type="CapsuleShape" id=24]
+height = 0.002
+
+[sub_resource type="CylinderShape" id=11]
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("T1:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("T2:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("T3:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("T1:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.75553, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("T2:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.60554, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("T3:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.45495, 0 ) ]
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("..:translation:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("..:translation:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("..:translation:z")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=32]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=17]
+
+[sub_resource type="BoxShape" id=34]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="void" type="Spatial"]
+script = ExtResource( 7 )
+
+[node name="walls" type="Spatial" parent="."]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="bottomPlane" type="CSGMesh" parent="walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00151265, 0.00281289, 0.000795007 )
+mesh = SubResource( 1 )
+material = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="walls/bottomPlane"]
+transform = Transform( 2.1378, 0, 0, 0, 0.035328, 0, 0, 0, 1.92858, -50.5788, 0, 49.9691 )
+collision_layer = 5
+collision_mask = 5
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/bottomPlane/StaticBody"]
+transform = Transform( 125.4, 0, 0, 0, 1.17847, 0, 0, 0, 130.487, 23.5274, 0, -25.5422 )
+shape = SubResource( 4 )
+
+[node name="topPlane" type="CSGMesh" parent="walls"]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.00151265, 20.0028, 0.000795007 )
+mesh = SubResource( 1 )
+material = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="walls/topPlane"]
+transform = Transform( 2.1378, 0, 0, 0, 0.035328, 0, 0, 0, 1.92858, -50.5788, 0, 49.9691 )
+collision_layer = 5
+collision_mask = 5
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/topPlane/StaticBody"]
+transform = Transform( 125.4, 0, 0, 0, 1, 0, 0, 0, 130.487, 23.5274, 0, -25.5421 )
+shape = SubResource( 4 )
+
+[node name="northPlane" type="CSGMesh" parent="walls"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 48.0015, 10.0028, 0.000795007 )
+mesh = SubResource( 6 )
+material = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="walls/northPlane"]
+transform = Transform( 2.1378, 0, 0, 0, 0.035328, 0, 0, 0, 1.92858, -50.5788, 0, 49.9691 )
+collision_layer = 5
+collision_mask = 5
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/northPlane/StaticBody"]
+transform = Transform( 125.4, 0, 0, 0, 1, 0, 0, 0, 130.487, 23.5274, 0, -25.5421 )
+shape = SubResource( 4 )
+
+[node name="southPlane" type="CSGMesh" parent="walls"]
+transform = Transform( -4.37114e-08, 1, 0, 1, 4.37114e-08, 8.74228e-08, 8.74228e-08, 3.82137e-15, -1, -47.9985, 10.0028, 0.000795007 )
+mesh = SubResource( 6 )
+material = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="walls/southPlane"]
+transform = Transform( 2.1378, 0, 0, 0, 0.035328, 0, 0, 0, 1.92858, -50.5788, 0, 49.9691 )
+collision_layer = 5
+collision_mask = 5
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/southPlane/StaticBody"]
+transform = Transform( 125.4, 0, 0, 0, 1, 0, 0, 0, 130.487, 23.5274, 0, -25.5421 )
+shape = SubResource( 4 )
+
+[node name="westPlane" type="CSGMesh" parent="walls"]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.00151443, 10.0028, -48.9992 )
+mesh = SubResource( 6 )
+material = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="walls/westPlane"]
+transform = Transform( 2.1378, 0, 0, 0, 0.035328, 0, 0, 0, 1.92858, -50.5788, 0, 49.9691 )
+collision_layer = 5
+collision_mask = 5
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/westPlane/StaticBody"]
+transform = Transform( 125.4, 0, 0, 0, 1, 0, 0, 0, 130.487, 23.5274, 0, -25.5421 )
+shape = SubResource( 4 )
+
+[node name="eastPlane" type="CSGMesh" parent="walls"]
+transform = Transform( -5.21253e-16, -1.19249e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, 1.19249e-08, 0.00151443, 10.0028, 48.2081 )
+mesh = SubResource( 6 )
+material = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="walls/eastPlane"]
+transform = Transform( 2.1378, 0, 0, 0, 0.035328, 0, 0, 0, 1.92858, -50.5788, 0, 49.9691 )
+collision_layer = 5
+collision_mask = 5
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/eastPlane/StaticBody"]
+transform = Transform( 125.4, 0, 0, 0, 1, 0, 0, 0, 130.487, 23.5274, 0, -25.5421 )
+shape = SubResource( 4 )
+
+[node name="player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.93711 )
+script = ExtResource( 1 )
+speed = 15
+accel = 20
+gravity = 15
+jump = 10
+
+[node name="head" type="Spatial" parent="player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.634651, 0 )
+
+[node name="Camera" type="Camera" parent="player/head"]
+environment = ExtResource( 4 )
+far = 300.0
+
+[node name="UI" type="Control" parent="player/head/Camera"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+script = ExtResource( 23 )
+
+[node name="TextureRect" type="TextureRect" parent="player/head/Camera/UI"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 21 )
+
+[node name="Timer" type="Timer" parent="player/head/Camera/UI"]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/UI"]
+anims/RESET = SubResource( 20 )
+anims/fadeUI = ExtResource( 24 )
+
+[node name="pause" type="Control" parent="player/head/Camera/UI"]
+visible = false
+margin_right = 1455.0
+margin_bottom = 1080.0
+rect_scale = Vector2( 1.32, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="player/head/Camera/UI/pause"]
+margin_right = 1455.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 0.827451 )
+
+[node name="info" type="Label" parent="player/head/Camera/UI/pause"]
+margin_left = 303.03
+margin_top = 192.0
+margin_right = 1148.03
+margin_bottom = 272.0
+custom_colors/font_color = Color( 0.835294, 0.835294, 0.835294, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "The game is not paused!"
+
+[node name="resume" type="Button" parent="player/head/Camera/UI/pause"]
+margin_left = 648.485
+margin_top = 480.0
+margin_right = 802.485
+margin_bottom = 530.0
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Quit")
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.835294, 0.835294, 0.835294, 1 )
+custom_fonts/font = SubResource( 22 )
+custom_styles/focus = SubResource( 23 )
+text = "Resume"
+flat = true
+
+[node name="Quit" type="Button" parent="player/head/Camera/UI/pause"]
+margin_left = 648.485
+margin_top = 560.0
+margin_right = 802.485
+margin_bottom = 610.0
+focus_neighbour_top = NodePath("../resume")
+focus_neighbour_bottom = NodePath("../resume")
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.835294, 0.835294, 0.835294, 1 )
+custom_fonts/font = SubResource( 22 )
+custom_styles/focus = SubResource( 23 )
+text = "Quit"
+flat = true
+
+[node name="damageOverlay" type="TextureRect" parent="player/head/Camera/UI"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 29 )
+
+[node name="health" type="Control" parent="player/head/Camera/UI"]
+margin_left = 768.0
+margin_right = 1152.0
+margin_bottom = 120.0
+
+[node name="h1" type="Control" parent="player/head/Camera/UI/health"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 104.0
+margin_bottom = 104.0
+
+[node name="Sprite" type="Sprite" parent="player/head/Camera/UI/health/h1"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 25 )
+
+[node name="Sprite2" type="Sprite" parent="player/head/Camera/UI/health/h1"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 32 )
+
+[node name="Sprite3" type="Sprite" parent="player/head/Camera/UI/health/h1"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 33 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/UI/health/h1"]
+anims/RESET = SubResource( 25 )
+anims/loseHP = SubResource( 26 )
+
+[node name="h2" type="Control" parent="player/head/Camera/UI/health"]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 232.0
+margin_bottom = 104.0
+
+[node name="Sprite" type="Sprite" parent="player/head/Camera/UI/health/h2"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 25 )
+
+[node name="Sprite2" type="Sprite" parent="player/head/Camera/UI/health/h2"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 32 )
+
+[node name="Sprite3" type="Sprite" parent="player/head/Camera/UI/health/h2"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 33 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/UI/health/h2"]
+anims/RESET = SubResource( 27 )
+anims/loseHP = SubResource( 28 )
+
+[node name="h3" type="Control" parent="player/head/Camera/UI/health"]
+margin_left = 320.0
+margin_top = 64.0
+margin_right = 360.0
+margin_bottom = 104.0
+
+[node name="Sprite" type="Sprite" parent="player/head/Camera/UI/health/h3"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 25 )
+
+[node name="Sprite2" type="Sprite" parent="player/head/Camera/UI/health/h3"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 32 )
+
+[node name="Sprite3" type="Sprite" parent="player/head/Camera/UI/health/h3"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 33 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/UI/health/h3"]
+anims/RESET = SubResource( 29 )
+anims/loseHP = SubResource( 30 )
+
+[node name="TextureRect2" type="TextureRect" parent="player/head/Camera/UI"]
+margin_top = -56.0
+margin_right = 1920.0
+margin_bottom = 1024.0
+texture = ExtResource( 30 )
+
+[node name="ColorRect2" type="ColorRect" parent="player/head/Camera"]
+material = SubResource( 10 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 1
+color = Color( 1, 1, 1, 0 )
+
+[node name="weapons" type="Spatial" parent="player/head/Camera"]
+script = ExtResource( 6 )
+
+[node name="left" type="Spatial" parent="player/head/Camera/weapons"]
+
+[node name="handL" type="Spatial" parent="player/head/Camera/weapons/left"]
+
+[node name="Hand_L2" parent="player/head/Camera/weapons/left/handL" instance=ExtResource( 10 )]
+transform = Transform( 0.0480304, -0.0680824, -0.695024, -0.571987, -0.403523, 0, -0.400654, 0.567921, -0.0833195, -0.739407, -0.571382, -1.02395 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/weapons/left/handL"]
+"anims/New Anim" = SubResource( 14 )
+
+[node name="shootingPoint" type="Spatial" parent="player/head/Camera/weapons/left/handL"]
+transform = Transform( 0.999976, -0.000608457, -0.0069547, 0, 0.996195, -0.0871557, 0.00698126, 0.0871536, 0.99617, -0.722849, -0.497935, -0.753362 )
+
+[node name="ball" type="Spatial" parent="player/head/Camera/weapons/left"]
+visible = false
+
+[node name="Balls" parent="player/head/Camera/weapons/left/ball" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.707381, -0.0490384, -0.903331 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/weapons/left/ball"]
+"anims/New Anim" = SubResource( 18 )
+
+[node name="shootingPoint" type="Spatial" parent="player/head/Camera/weapons/left/ball"]
+transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, -0.472612, -0.12863 )
+
+[node name="dodecagowno" type="Spatial" parent="player/head/Camera/weapons/left"]
+visible = false
+
+[node name="Dodecagowno" parent="player/head/Camera/weapons/left/dodecagowno" instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684, -0.051, -1 )
+
+[node name="shootingPoint" type="Spatial" parent="player/head/Camera/weapons/left/dodecagowno"]
+transform = Transform( 0.99863, -0.00365077, -0.0522085, 0, 0.997564, -0.0697565, 0.052336, 0.0696609, 0.996197, -0.689, -0.044, -1 )
+
+[node name="shootingPoint2" type="Spatial" parent="player/head/Camera/weapons/left/dodecagowno"]
+transform = Transform( 1, 0, 0, 0, 0.99863, -0.052336, 0, 0.052336, 0.99863, -0.689, -0.044, -1 )
+
+[node name="shootingPoint3" type="Spatial" parent="player/head/Camera/weapons/left/dodecagowno"]
+transform = Transform( 0.99863, 0.00365077, 0.0522085, 0, 0.997564, -0.0697565, -0.052336, 0.0696609, 0.996197, -0.689, -0.044, -1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/weapons/left/dodecagowno"]
+"anims/New Anim" = SubResource( 31 )
+
+[node name="right" type="Spatial" parent="player/head/Camera/weapons"]
+
+[node name="handR" type="Spatial" parent="player/head/Camera/weapons/right"]
+
+[node name="Hand_R" parent="player/head/Camera/weapons/right/handR" instance=ExtResource( 9 )]
+transform = Transform( 0.0480305, 0.0680825, 0.695024, 0.550565, -0.432273, 0.00429671, 0.429618, 0.546356, -0.0832087, 0.721791, -0.494758, -0.982948 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/weapons/right/handR"]
+"anims/New Anim" = SubResource( 15 )
+
+[node name="shootingPoint" type="Spatial" parent="player/head/Camera/weapons/right/handR"]
+transform = Transform( 0.999976, 0.000608457, 0.0069547, 0, 0.996195, -0.0871557, -0.00698126, 0.0871536, 0.99617, 0.651282, -0.497935, -0.753362 )
+
+[node name="bolter" type="Spatial" parent="player/head/Camera/weapons/right"]
+visible = false
+
+[node name="bolter" parent="player/head/Camera/weapons/right/bolter" instance=ExtResource( 18 )]
+transform = Transform( -0.2, 0, -2.62268e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.3, 0.454342, -0.917725, -0.886313 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/weapons/right/bolter"]
+"anims/New Anim" = SubResource( 16 )
+
+[node name="shootingPoint" type="Spatial" parent="player/head/Camera/weapons/right/bolter"]
+transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0.565312, -0.493614, -1.33704 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="player/head/Camera/weapons/right/bolter"]
+stream = ExtResource( 28 )
+volume_db = 1.0
+
+[node name="mother" type="Spatial" parent="player/head/Camera/weapons/right"]
+visible = false
+
+[node name="mother" parent="player/head/Camera/weapons/right/mother" instance=ExtResource( 37 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.703698, 0, -1.07543 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player/head/Camera/weapons/right/mother"]
+"anims/New Anim" = SubResource( 33 )
+
+[node name="shootingPoint" type="Spatial" parent="player/head/Camera/weapons/right/mother"]
+transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0.704, 0, -1.075 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="player/head/Camera/weapons/right/mother"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.683143, 0, -1.06731 )
+stream = ExtResource( 39 )
+
+[node name="interactRay" type="RayCast" parent="player/head/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -2.5 )
+collision_mask = 2
+collide_with_areas = true
+script = ExtResource( 13 )
+
+[node name="CSGSphere" type="CSGSphere" parent="player"]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="player"]
+transform = Transform( 0.7, 0, 0, 0, 0.2, 0, 0, 0, 0.7, 0, -0.651928, 0 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="player"]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="Area" type="Area" parent="player"]
+
+[node name="CollisionShape" type="CollisionShape" parent="player/Area"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.210308, 0 )
+shape = SubResource( 24 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 4 )
+
+[node name="weaponAltar" type="Spatial" parent="."]
+script = ExtResource( 11 )
+
+[node name="nextWave" type="Spatial" parent="weaponAltar"]
+script = ExtResource( 12 )
+
+[node name="Pedastal" parent="weaponAltar/nextWave" instance=ExtResource( 8 )]
+
+[node name="T1" type="CSGTorus" parent="weaponAltar/nextWave"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75553, 0 )
+inner_radius = 0.01
+outer_radius = 0.1
+sides = 6
+material = ExtResource( 5 )
+
+[node name="T2" type="CSGTorus" parent="weaponAltar/nextWave"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60554, 0 )
+inner_radius = 0.15
+outer_radius = 0.25
+sides = 6
+material = ExtResource( 5 )
+
+[node name="T3" type="CSGTorus" parent="weaponAltar/nextWave"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45495, 0 )
+inner_radius = 0.3
+outer_radius = 0.4
+sides = 6
+material = ExtResource( 5 )
+
+[node name="Area" type="Area" parent="weaponAltar/nextWave"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 14 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/nextWave/Area"]
+transform = Transform( 0.7, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0.908183, 0 )
+shape = SubResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="weaponAltar/nextWave"]
+anims/RESET = SubResource( 12 )
+anims/newWave = ExtResource( 15 )
+
+[node name="weaponPedestal" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal2" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal2" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal3" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal3" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal4" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal4" instance=ExtResource( 8 )]
+
+[node name="Spatial" type="Spatial" parent="weaponAltar/weaponPedestal4"]
+
+[node name="Hand_L" parent="weaponAltar/weaponPedestal4/Spatial" instance=ExtResource( 10 )]
+transform = Transform( -0.7, 6.11959e-08, 0, -6.11959e-08, -0.7, 0, 0, 0, 0.7, 0, 1.8, 0 )
+
+[node name="Area" type="Area" parent="weaponAltar/weaponPedestal4/Spatial"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/weaponPedestal4/Spatial/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78591, 0 )
+shape = SubResource( 13 )
+
+[node name="weaponPedestal5" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal5" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal6" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal6" instance=ExtResource( 8 )]
+
+[node name="Spatial" type="Spatial" parent="weaponAltar/weaponPedestal6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71558, 0 )
+
+[node name="Dodecagowno" parent="weaponAltar/weaponPedestal6/Spatial" instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00576353 )
+
+[node name="AreaDodeca" type="Area" parent="weaponAltar/weaponPedestal6/Spatial"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 34 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/weaponPedestal6/Spatial/AreaDodeca"]
+shape = SubResource( 32 )
+
+[node name="weaponPedestal7" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal7" instance=ExtResource( 8 )]
+
+[node name="Spatial" type="Spatial" parent="weaponAltar/weaponPedestal7"]
+
+[node name="Balls" parent="weaponAltar/weaponPedestal7/Spatial" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7322, 0 )
+
+[node name="Area" type="Area" parent="weaponAltar/weaponPedestal7/Spatial"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 22 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/weaponPedestal7/Spatial/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114125, 1.7483, -0.263688 )
+shape = SubResource( 19 )
+
+[node name="weaponPedestal8" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal8" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal9" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 2.7 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal9" instance=ExtResource( 8 )]
+
+[node name="Spatial" type="Spatial" parent="weaponAltar/weaponPedestal9"]
+
+[node name="bolter" parent="weaponAltar/weaponPedestal9/Spatial" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 0, 0, 0.183462, 0.119452, 0, -0.0796346, 0.275193, 0, 1.45832, 0 )
+
+[node name="AreaBolter" type="Area" parent="weaponAltar/weaponPedestal9/Spatial"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 19 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/weaponPedestal9/Spatial/AreaBolter"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.70272, 0 )
+shape = SubResource( 17 )
+
+[node name="weaponPedestal10" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -2.7 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal10" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal11" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, -2.7 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal11" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal12" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 2.7 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal12" instance=ExtResource( 8 )]
+
+[node name="Spatial" type="Spatial" parent="weaponAltar/weaponPedestal12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67569, 0 )
+
+[node name="mother" parent="weaponAltar/weaponPedestal12/Spatial" instance=ExtResource( 37 )]
+
+[node name="AreaMother" type="Area" parent="weaponAltar/weaponPedestal12/Spatial"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 38 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/weaponPedestal12/Spatial/AreaMother"]
+shape = SubResource( 34 )
+
+[node name="weaponPedestal13" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 0, 6.5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal13" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal14" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, 6.5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal14" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal15" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, -6.5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal15" instance=ExtResource( 8 )]
+
+[node name="weaponPedestal16" type="Spatial" parent="weaponAltar"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 0, -6.5 )
+
+[node name="Pedastal" parent="weaponAltar/weaponPedestal16" instance=ExtResource( 8 )]
+
+[node name="Spatial" type="Spatial" parent="weaponAltar/weaponPedestal16"]
+
+[node name="Hand_R" parent="weaponAltar/weaponPedestal16/Spatial" instance=ExtResource( 9 )]
+transform = Transform( -0.7, 6.11959e-08, 0, -6.11959e-08, -0.7, 0, 0, 0, 0.7, 0, 1.8, 0 )
+
+[node name="Area2" type="Area" parent="weaponAltar/weaponPedestal16/Spatial"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 17 )
+
+[node name="CollisionShape" type="CollisionShape" parent="weaponAltar/weaponPedestal16/Spatial/Area2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78591, 0 )
+shape = SubResource( 13 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="weaponAltar"]
+stream = ExtResource( 36 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="weaponAltar"]
+stream = ExtResource( 35 )
+volume_db = 1.0
+
+[node name="bulletManager" type="Spatial" parent="."]
+
+[node name="enemyManager" type="Spatial" parent="."]
+script = ExtResource( 27 )
+
+[node name="waveTimer" type="Timer" parent="enemyManager"]
+wait_time = 75.0
+one_shot = true
+
+[node name="enemySpawnTimer" type="Timer" parent="enemyManager"]
+wait_time = 1.5
+autostart = true
+
+[node name="spawnpoints" type="Spatial" parent="enemyManager"]
+
+[node name="1" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.60668, 0 )
+
+[node name="2" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1596, 5.60668, 0.231737 )
+
+[node name="3" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4515, 5.60668, 0 )
+
+[node name="4" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4515, 5.60668, 35.9397 )
+
+[node name="5" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.52309, 5.60668, 35.9397 )
+
+[node name="6" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.6242, 5.60668, 48.7477 )
+
+[node name="7" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.9878, 5.60668, 45.1665 )
+
+[node name="8" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1133, 5.60668, 78.1578 )
+
+[node name="9" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.4818, 5.60668, 75.2467 )
+
+[node name="10" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -50.2175, 5.60668, 51.9355 )
+
+[node name="11" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9985, 5.60668, -5.89795 )
+
+[node name="12" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.0596, 5.60668, -7.32042 )
+
+[node name="13" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6087, 5.60668, -13.651 )
+
+[node name="14" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -62.2296, 5.60668, -40.5122 )
+
+[node name="15" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6467, 5.60668, -42.9869 )
+
+[node name="16" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1839, 5.60668, -79.5149 )
+
+[node name="17" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.3456, 5.60668, -85.6453 )
+
+[node name="18" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4595, 5.60668, -64.2782 )
+
+[node name="19" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.2788, 5.60668, -87.0507 )
+
+[node name="20" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.1921, 5.60668, -45.1927 )
+
+[node name="21" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 86.6258, 5.60668, -29.2314 )
+
+[node name="22" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.5892, 5.60668, -23.8016 )
+
+[node name="23" type="Spatial" parent="enemyManager/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.008, 5.60668, 70.4174 )
+
+[connection signal="timeout" from="player/head/Camera/UI/Timer" to="player/head/Camera/UI" method="_on_Timer_timeout"]
+[connection signal="button_down" from="player/head/Camera/UI/pause/resume" to="player/head/Camera/UI" method="_on_resume_button_down"]
+[connection signal="button_down" from="player/head/Camera/UI/pause/Quit" to="player/head/Camera/UI" method="_on_Quit_button_down"]
+[connection signal="nextWaveClick" from="player/head/Camera/interactRay" to="enemyManager" method="_on_interactRay_nextWaveClick"]
+[connection signal="area_entered" from="player/Area" to="player" method="_on_Area_area_entered"]
+[connection signal="input_event" from="weaponAltar/nextWave/Area" to="." method="_on_Area_input_event"]
+[connection signal="timeout" from="enemyManager/waveTimer" to="enemyManager" method="_on_waveTimer_timeout"]
+[connection signal="timeout" from="enemyManager/enemySpawnTimer" to="enemyManager" method="_on_enemySpawnTimer_timeout"]
